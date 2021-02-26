@@ -9,11 +9,9 @@
 response.headers.add
    Cache-Control:public, max-age=1200
 data.connect:[generic|babelfish]
-   database-type:mysql
    add:x:+/*/where/*/and
       get-nodes:x:@.arguments/*
    data.read
-      database-type:mysql
       table:translations
       columns
          id

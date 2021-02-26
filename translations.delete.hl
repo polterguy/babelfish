@@ -7,11 +7,9 @@ validators.mandatory:x:@.arguments/*/locale
 validators.mandatory:x:@.arguments/*/id
 auth.ticket.verify:root, admin, translator
 data.connect:[generic|babelfish]
-   database-type:mysql
    add:x:+/*/where/*/and
       get-nodes:x:@.arguments/*
    data.delete
-      database-type:mysql
       table:translations
       where
          and

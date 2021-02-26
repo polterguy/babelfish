@@ -10,9 +10,7 @@ data.connect:[generic|babelfish]
       get-nodes:x:@.arguments/*/[0,1]
    add:x:+/*/values
       get-nodes:x:@.arguments/*/[1,1000]
-   database-type:mysql
    data.update
-      database-type:mysql
       table:languages
       values
       where

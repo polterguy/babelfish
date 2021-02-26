@@ -6,9 +6,7 @@
 response.headers.add
    Cache-Control:public, max-age=1200
 data.connect:[generic|babelfish]
-   database-type:mysql
    data.read
-      database-type:mysql
       table:languages
       columns
          locale
