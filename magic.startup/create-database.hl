@@ -38,6 +38,7 @@ fork
             io.file.load:x:-
             data.connect:magic
                data.execute:x:@io.file.load
+            log.info:Babelfish database successfully created
       else
          log.info:Babelfish database already exists
    .catch
