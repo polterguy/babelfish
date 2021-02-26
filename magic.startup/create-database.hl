@@ -1,0 +1,44 @@
+
+/*
+ * Runs during startup of Magic, and basically just ensures the babelfish database exists.
+ * If the database doesn't exist, it will create it.
+ */
+
+
+/*
+ * Making sure we're executing this after all other startup scripts have been executed.
+ */
+fork
+   sleep:5000
+
+
+   /*
+    * Figuring out what database we're using by default, to make
+    * sure we're using correct database adapter and correct SQL schema file.
+    */
+   log.info:Initializing babelfish module
+   try
+      config.get:"magic:databases:default"
+      strings.concat
+         .:magic.db.
+         get-value:x:@config.get
+         .:.databases
+      signal:x:-
+      if
+         not
+            exists:x:@signal/*/*/db/=babelfish
+         .lambda
+
+            // Database doesn't exist, creating it.
+            strings.concat
+               .:/modules/babelfish/magic.startup/
+               get-value:x:@config.get
+               .:-babelfish.sql
+            io.file.load:-
+            data.connect:magic
+               data.execute:x:@io.file.load
+            log.info:Creating babelfish database
+      else
+         log.info:Babelfish database already exists
+   .catch
+      log.error:x:@.arguments/*/message
