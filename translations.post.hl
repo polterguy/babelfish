@@ -12,6 +12,69 @@ data.connect:[generic|babelfish]
       table:translations
       return-id:bool:false
       values
+
+
+   /*
+    * This is where we duplicate our entry, but only if
+    * the [locale] for created item is English.
+    */
+   if
+      eq
+         get-value:x:@.arguments/*/locale
+         .:en
+      .lambda
+
+         /*
+          * Retrieving and iterating over all languages we support.
+          */
+         data.read
+            table:languages
+            columns
+               locale
+            where
+               and
+                  locale.neq:en
+         for-each:x:@data.read/*
+
+            /*
+             * Making sure item is not already translated for currentyl iterated language.
+             */
+            data.read
+               table:translations
+               columns
+                  count(*)
+                     as:count
+               where
+                  and
+                     id.eq:x:@.arguments/*/id
+                     locale.eq:x:@.dp/#/*/locale
+            if
+               eq
+                  convert:x:@data.read/*/*
+                     type:int
+                  .:int:0
+               .lambda
+
+                  /*
+                   * Item hs not been translated for currently iterated language,
+                   * hence invoking Google Translate and injecting default translation.
+                   */
+                  unwrap:x:+/*
+                  signal:magic.google.translate
+                     text:x:@.arguments/*/content
+                     src-lang:en
+                     dest-lang:x:@.dp/#/*/locale
+                  data.create
+                     table:translations
+                     values
+                        id:x:@.arguments/*/id
+                        locale:x:@.dp/#/*/locale
+                        content:x:@signal
+
+
+   /*
+    * Returning success to caller.
+    */
    unwrap:x:+/*
    return
       result:success
