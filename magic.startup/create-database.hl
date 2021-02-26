@@ -35,7 +35,7 @@ fork
                .:/modules/babelfish/magic.startup/
                get-value:x:@config.get
                .:-babelfish.sql
-            io.file.load:-
+            io.file.load:x:-
             data.connect:magic
                data.execute:x:@io.file.load
       else
