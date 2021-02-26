@@ -30,6 +30,7 @@ fork
          .lambda
 
             // Database doesn't exist, creating it.
+            log.info:Creating babelfish database
             strings.concat
                .:/modules/babelfish/magic.startup/
                get-value:x:@config.get
@@ -37,8 +38,9 @@ fork
             io.file.load:-
             data.connect:magic
                data.execute:x:@io.file.load
-            log.info:Creating babelfish database
       else
          log.info:Babelfish database already exists
    .catch
-      log.error:x:@.arguments/*/message
+      log.error
+         .:"Something went wrong when initializing babelfish module - "
+         get-value:x:@.arguments/*/message
