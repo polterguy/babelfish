@@ -15,61 +15,53 @@ data.connect:[generic|babelfish]
 
 
    /*
-    * This is where we duplicate our entry, but only if
-    * the [locale] for created item is English.
+    * This is where we duplicate our entry.
+    * First we retrieve and iterate over all languages we support.
     */
-   if
-      eq
-         get-value:x:@.arguments/*/locale
-         .:en
-      .lambda
+   data.read
+      table:languages
+      columns
+         locale
+      where
+         and
+            locale.neq:x:@.arguments/*/locale
+   for-each:x:@data.read/*
 
-         /*
-          * Retrieving and iterating over all languages we support.
-          */
-         data.read
-            table:languages
-            columns
-               locale
-            where
-               and
-                  locale.neq:en
-         for-each:x:@data.read/*
+      /*
+       * Making sure item is not already translated for currently iterated language.
+       */
+      data.read
+         table:translations
+         columns
+            count(*)
+               as:count
+         where
+            and
+               id.eq:x:@.arguments/*/id
+               locale.eq:x:@.dp/#/*/locale
+      if
+         eq
+            convert:x:@data.read/*/*
+               type:int
+            .:int:0
+         .lambda
 
             /*
-             * Making sure item is not already translated for currentyl iterated language.
+             * Item hs not been translated for currently iterated language,
+             * hence invoking Google Translate, and injecting default translation
+             * as returned from Google Translate.
              */
-            data.read
+            unwrap:x:+/*
+            signal:magic.google.translate
+               text:x:@.arguments/*/content
+               src-lang:x:@.arguments/*/locale
+               dest-lang:x:@.dp/#/*/locale
+            data.create
                table:translations
-               columns
-                  count(*)
-                     as:count
-               where
-                  and
-                     id.eq:x:@.arguments/*/id
-                     locale.eq:x:@.dp/#/*/locale
-            if
-               eq
-                  convert:x:@data.read/*/*
-                     type:int
-                  .:int:0
-               .lambda
-
-                  /*
-                   * Item hs not been translated for currently iterated language,
-                   * hence invoking Google Translate and injecting default translation.
-                   */
-                  unwrap:x:+/*
-                  signal:magic.google.translate
-                     text:x:@.arguments/*/content
-                     src-lang:en
-                     dest-lang:x:@.dp/#/*/locale
-                  data.create
-                     table:translations
-                     values
-                        id:x:@.arguments/*/id
-                        locale:x:@.dp/#/*/locale
-                        content:x:@signal
+               values
+                  id:x:@.arguments/*/id
+                  locale:x:@.dp/#/*/locale
+                  content:x:@signal
 
 
    /*
