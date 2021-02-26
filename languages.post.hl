@@ -1,0 +1,18 @@
+.arguments
+   locale:string
+   language:string
+.description:Creates an item in your languages table in your [generic|babelfish] database according to the specified arguments
+.type:crud-create
+auth.ticket.verify:root, admin, translator
+data.connect:[generic|babelfish]
+   database-type:mysql
+   add:x:+/*/values
+      get-nodes:x:@.arguments/*
+   data.create
+      database-type:mysql
+      table:languages
+      return-id:bool:false
+      values
+   unwrap:x:+/*
+   return
+      result:success

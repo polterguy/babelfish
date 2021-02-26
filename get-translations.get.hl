@@ -1,0 +1,25 @@
+/*
+ * This is the endpoint you should use to retrieve all translations from your backend,
+ * from your enterprise app, since it implements caching for 2 hours.
+ */
+.arguments
+   locale.eq:string
+   id.like:string
+.description:Returns all translation entities from your backend
+response.headers.add
+   Cache-Control:public, max-age=1200
+data.connect:[generic|babelfish]
+   database-type:mysql
+   add:x:+/*/where/*/and
+      get-nodes:x:@.arguments/*
+   data.read
+      database-type:mysql
+      table:translations
+      columns
+         id
+         locale
+         content
+      limit:-1
+      where
+         and
+   return-nodes:x:@data.read/*

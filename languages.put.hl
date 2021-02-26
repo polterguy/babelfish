@@ -1,0 +1,22 @@
+.arguments
+   locale:string
+   language:string
+.description:Updates an existing item in your languages table in your [generic|babelfish] database according to the specified arguments
+.type:crud-update
+validators.mandatory:x:@.arguments/*/locale
+auth.ticket.verify:root, admin, translator
+data.connect:[generic|babelfish]
+   add:x:+/+/*/where/*/and
+      get-nodes:x:@.arguments/*/[0,1]
+   add:x:+/*/values
+      get-nodes:x:@.arguments/*/[1,1000]
+   database-type:mysql
+   data.update
+      database-type:mysql
+      table:languages
+      values
+      where
+         and
+   unwrap:x:+/*
+   return
+      affected:x:@data.update

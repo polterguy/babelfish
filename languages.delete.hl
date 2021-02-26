@@ -1,0 +1,23 @@
+.arguments
+   locale:string
+.description:Deletes one item from your languages table in your [generic|babelfish] database matching the specified argument(s)
+.type:crud-delete
+validators.mandatory:x:@.arguments/*/locale
+auth.ticket.verify:root, admin, translator
+log.info
+   .:[generic|babelfish].languages entry updated
+   .:@" - Arguments: 
+"
+   lambda2hyper:x:@.arguments/*
+data.connect:[generic|babelfish]
+   database-type:mysql
+   add:x:+/*/where/*/and
+      get-nodes:x:@.arguments/*
+   data.delete
+      database-type:mysql
+      table:languages
+      where
+         and
+   unwrap:x:+/*
+   return
+      affected:x:@data.delete
