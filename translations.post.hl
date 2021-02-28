@@ -160,12 +160,28 @@ data.connect:[generic|babelfish]
                                  locale:x:@.dp/#/*/locale
                                  content:x:@signal
                   .catch
+
+                     /*
+                      * Google Translate failed for some reasons. Inserting bogus item,
+                      * and creating a log entry.
+                      */
                      log.error
                         .:"Couldn't translate entity for language '"
                         get-value:x:@.dp/#/*/locale
                         .:"', error occurring was '"
                         get-value:x:@.arguments/*/message
                         .:"'"
+
+
+                     /*
+                      * Google Translate returned something.
+                      */
+                     data.create
+                        table:translations
+                        values
+                           id:x:../*/.arguments/*/id
+                           locale:x:@.dp/#/*/locale
+                           content:'?????'
 
 
    /*
