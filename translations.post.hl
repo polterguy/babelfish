@@ -120,40 +120,52 @@ data.connect:[generic|babelfish]
                    * Item has not been translated for currently iterated language.
                    * Hence, invoking Google Translate, and injecting default translation entity
                    * as returned from Google Translate.
+                   *
+                   * Notice, Google Translate will return jibberish for some languages,
+                   * hence we need to accommodate for that, by making sure we trap JSON
+                   * parsing exceptions.
                    */
-                  unwrap:x:+/*
-                  signal:magic.google.translate
-                     text:x:@.arguments/*/content
-                     src-lang:x:@.arguments/*/locale
-                     dest-lang:x:@.dp/#/*/locale
+                  try
+                     unwrap:x:+/*
+                     signal:magic.google.translate
+                        text:x:@.arguments/*/content
+                        src-lang:x:@.arguments/*/locale
+                        dest-lang:x:@.dp/#/*/locale
 
 
-                  /*
-                   * Making sure Google Translate actually returned something
-                   * before attempting to insert item.
-                   */
-                  if
-                     and
-                        not
-                           eq
-                              get-value:x:@signal
-                              .:
-                        not
-                           eq
-                              get-value:x:@signal
-                              .
-                     .lambda
+                     /*
+                      * Making sure Google Translate actually returned something
+                      * before attempting to insert item.
+                      */
+                     if
+                        and
+                           not
+                              eq
+                                 get-value:x:@signal
+                                 .:
+                           not
+                              eq
+                                 get-value:x:@signal
+                                 .
+                        .lambda
 
 
-                        /*
-                         * Google Translate returned something.
-                         */
-                        data.create
-                           table:translations
-                           values
-                              id:x:@.arguments/*/id
-                              locale:x:@.dp/#/*/locale
-                              content:x:@signal
+                           /*
+                            * Google Translate returned something.
+                            */
+                           data.create
+                              table:translations
+                              values
+                                 id:x:@.arguments/*/id
+                                 locale:x:@.dp/#/*/locale
+                                 content:x:@signal
+                  .catch
+                     log.error
+                        .:"Couldn't translate entity for language '"
+                        get-value:x:@.dp/#/*/locale
+                        .:"', error occurring was '"
+                        get-value:x:@.arguments/*/message
+                        .:"'"
 
 
    /*
