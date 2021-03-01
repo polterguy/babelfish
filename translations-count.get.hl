@@ -23,6 +23,7 @@
    content.eq:string
 .description:Counts items from your translations table in your [generic|babelfish] database according to the specified arguments
 .type:crud-count
+auth.ticket.verify:root, admin, translator
 if
    exists:x:@.arguments/*/operator
    .lambda

@@ -1,0 +1,19 @@
+/*
+ * Returns count of all translation entities grouped by language that failed for some reasons.
+ */
+.description:Returns count of all translation entities grouped by language that failed for some reasons
+auth.ticket.verify:root, admin, translator
+data.connect:[generic|babelfish]
+   data.read
+      table:translations
+      columns
+         locale
+         count(*)
+            as:count
+      where
+         and
+            content.like:"???%"
+      group
+         locale
+      limit:-1
+   return-nodes:x:@data.read/*
