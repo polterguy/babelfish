@@ -13,7 +13,7 @@ go
 /*
  * Contains all supported languages in the system.
  */
- create table languages (
+create table languages (
   locale varchar(5) not null,
   language varchar(2048) null,
   primary key (locale)
