@@ -3,14 +3,40 @@
    language:string
 .description:Creates an item in your languages table in your [generic|babelfish] database according to the specified arguments
 .type:crud-create
+
+
+/*
+ * Making sure only authorised clients can invoke endpoint.
+ */
 auth.ticket.verify:root, admin, translator
+
+
+/*
+ * Connecting to database.
+ */
 data.connect:[generic|babelfish]
-   add:x:+/*/values
+
+
+   /*
+    * Parametrising invocation.
+    */
+   add:x:./*/data.create/*/values
       get-nodes:x:@.arguments/*
+
+
+   /*
+    * Creating our item in database.
+    */
    data.create
       table:languages
       return-id:bool:false
       values
+
+
+   /*
+    * Returning results of above invocation to caller.
+    */
+   response.status.set:201
    unwrap:x:+/*
    return
       result:success

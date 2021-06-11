@@ -2,20 +2,45 @@
    locale:string
 .description:Deletes one item from your languages table in your [generic|babelfish] database matching the specified argument(s)
 .type:crud-delete
+
+
+/*
+ * Sanity checking invocation.
+ */
 validators.mandatory:x:@.arguments/*/locale
+
+
+/*
+ * Making sure only authorised clients can invoke endpoint.
+ */
 auth.ticket.verify:root, admin, translator
-log.info
-   .:[generic|babelfish].languages entry updated
-   .:@" - Arguments: 
-"
-   lambda2hyper:x:@.arguments/*
+
+
+/*
+ * Connecting to database.
+ */
 data.connect:[generic|babelfish]
-   add:x:+/*/where/*/and
+
+
+   /*
+    * Parametrising invocation.
+    */
+   add:x:./*/data.delete/*/where/*/and
       get-nodes:x:@.arguments/*
+
+
+   /*
+    * Deleting specified item from database.
+    */
    data.delete
       table:languages
       where
          and
+
+
+   /*
+    * Returning results of above invocation to caller.
+    */
    unwrap:x:+/*
    return
       affected:x:@data.delete

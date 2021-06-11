@@ -3,18 +3,48 @@
    language:string
 .description:Updates an existing item in your languages table in your [generic|babelfish] database according to the specified arguments
 .type:crud-update
-validators.mandatory:x:@.arguments/*/locale
+
+
+/*
+ * Making sure only authorised clients can invoke endpoint.
+ */
 auth.ticket.verify:root, admin, translator
+
+
+/*
+ * Sanity checking invocation.
+ */
+validators.mandatory:x:@.arguments/*/locale
+
+
+/*
+ * Connecting to database.
+ */
 data.connect:[generic|babelfish]
+
+
+   /*
+    * Parametrising invocation.
+    */
    add:x:+/+/*/where/*/and
       get-nodes:x:@.arguments/*/[0,1]
    add:x:+/*/values
       get-nodes:x:@.arguments/*/[1,1000]
+
+
+   /*
+    * Updating our item in database.
+    */
    data.update
       table:languages
       values
       where
          and
+
+
+   /*
+    * Returning results of above invocation to caller.
+    */
    unwrap:x:+/*
    return
       affected:x:@data.update

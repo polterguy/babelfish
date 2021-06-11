@@ -3,16 +3,46 @@
    locale:string
 .description:Deletes one item from your translations table in your [generic|babelfish] database matching the specified argument(s)
 .type:crud-delete
+
+
+/*
+ * Making sure only authorised clients can invoke endpoint.
+ */
+auth.ticket.verify:root, admin, translator
+
+
+/*
+ * Sanity checking invocation.
+ */
 validators.mandatory:x:@.arguments/*/locale
 validators.mandatory:x:@.arguments/*/id
-auth.ticket.verify:root, admin, translator
+
+
+/*
+ * Connecting to database.
+ */
 data.connect:[generic|babelfish]
+
+
+   /*
+    * Parametrising invocation.
+    */
    add:x:+/*/where/*/and
       get-nodes:x:@.arguments/*
+
+
+   /*
+    * Deleting item from database.
+    */
    data.delete
       table:translations
       where
          and
+
+
+   /*
+    * Returning result of above invocation.
+    */
    unwrap:x:+/*
    return
       affected:x:@data.delete

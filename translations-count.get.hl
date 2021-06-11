@@ -23,7 +23,17 @@
    content.eq:string
 .description:Counts items from your translations table in your [generic|babelfish] database according to the specified arguments
 .type:crud-count
+
+
+/*
+ * Making sure only authorised clients can invoke endpoint.
+ */
 auth.ticket.verify:root, admin, translator
+
+
+/*
+ * Applying correct boolean operator according to arguments.
+ */
 if
    exists:x:@.arguments/*/operator
    .lambda
@@ -34,12 +44,27 @@ if
                get-value:x:@.arguments/*/operator
          default
             throw:"Unsupported operator, only 'and' and 'or' supported"
+
+
+/*
+ * Connecting to database.
+ */
 data.connect:[generic|babelfish]
+
+
+   /*
+    * Parametrising invocation.
+    */
    add:x:+/+/+
       get-nodes:x:@.arguments/*/operator
    remove-nodes:x:@.arguments/*/operator
    add:x:+/*/where/*
       get-nodes:x:@.arguments/*
+
+
+   /*
+    * Reading items from our database.
+    */
    data.read
       table:translations
       columns
@@ -48,4 +73,9 @@ data.connect:[generic|babelfish]
       where
          and
       limit:long:1
-   return-nodes:x:-/*/*
+
+
+   /*
+    * Returning results of above invocation to caller.
+    */
+   return-nodes:x:@data.read/*/*

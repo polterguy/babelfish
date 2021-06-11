@@ -27,7 +27,17 @@
    content.eq:string
 .description:Returns items from your translations table in your [generic|babelfish] database according to the specified arguments
 .type:crud-read
+
+
+/*
+ * Making sure only authorised clients can invoke endpoint.
+ */
 auth.ticket.verify:root, admin, translator
+
+
+/*
+ * Applying correct boolean operator to invocation.
+ */
 if
    exists:x:@.arguments/*/operator
    .lambda
@@ -38,7 +48,17 @@ if
                get-value:x:@.arguments/*/operator
          default
             throw:"Unsupported operator, only 'and' and 'or' supported"
+
+
+/*
+ * Connecting to database.
+ */
 data.connect:[generic|babelfish]
+
+
+   /*
+    * Parametrising invocation.
+    */
    add:x:+/+/+/+/+/+/+
       get-nodes:x:@.arguments/*/limit
       get-nodes:x:@.arguments/*/offset
@@ -51,6 +71,11 @@ data.connect:[generic|babelfish]
    remove-nodes:x:@.arguments/*/direction
    add:x:+/*/where/*
       get-nodes:x:@.arguments/*
+
+
+   /*
+    * Reading items from database.
+    */
    data.read
       table:translations
       columns
@@ -59,4 +84,9 @@ data.connect:[generic|babelfish]
          content
       where
          and
+
+
+   /*
+    * Returning result of above invocation.
+    */
    return-nodes:x:@data.read/*

@@ -2,8 +2,23 @@
  * Returns count of all translation entities grouped by language that failed for some reasons.
  */
 .description:Returns count of all translation entities grouped by language that failed for some reasons
+
+
+/*
+ * Verifying only authorised users can access endpoint.
+ */
 auth.ticket.verify:root, admin, translator
+
+
+/*
+ * Connecting to database.
+ */
 data.connect:[generic|babelfish]
+
+
+   /*
+    * Reading items from database.
+    */
    data.read
       table:translations
       columns
@@ -16,4 +31,9 @@ data.connect:[generic|babelfish]
       group
          locale
       limit:-1
+
+
+   /*
+    * Returning results of above invocation to caller.
+    */
    return-nodes:x:@data.read/*

@@ -3,13 +3,33 @@
  * from your enterprise app, since it implements caching for 2 hours.
  */
 .description:Returns all languagues from your backend
+
+
+/*
+ * Making sure we cache items on client for 1200 seconds.
+ */
 response.headers.add
    Cache-Control:public, max-age=1200
+
+
+/*
+ * Connecting to database.
+ */
 data.connect:[generic|babelfish]
+
+
+   /*
+    * Reading items from database.
+    */
    data.read
       table:languages
       columns
          locale
          language
       limit:-1
+
+
+   /*
+    * Returning results of above invocation to caller.
+    */
    return-nodes:x:@data.read/*

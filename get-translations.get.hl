@@ -6,11 +6,26 @@
    locale.eq:string
    id.like:string
 .description:Returns all translation entities from your backend
+
+
+/*
+ * Making sure we cache items on client for 1200 seconds.
+ */
 response.headers.add
    Cache-Control:public, max-age=1200
+
+
+/*
+ * Connecting to database.
+ */
 data.connect:[generic|babelfish]
    add:x:+/*/where/*/and
       get-nodes:x:@.arguments/*
+
+
+   /*
+    * Reading items from database.
+    */
    data.read
       table:translations
       columns
@@ -20,4 +35,9 @@ data.connect:[generic|babelfish]
       limit:-1
       where
          and
+
+
+   /*
+    * Returning results of above invocation to caller.
+    */
    return-nodes:x:@data.read/*
