@@ -1,3 +1,7 @@
+
+/*
+ * Deletes the translation from your backend with the specified primary key.
+ */
 .arguments
    id:string
    locale:string

@@ -1,19 +1,7 @@
-.arguments
-   operator:string
-   locale.like:string
-   locale.mt:string
-   locale.lt:string
-   locale.mteq:string
-   locale.lteq:string
-   locale.neq:string
-   locale.eq:string
-   language.like:string
-   language.mt:string
-   language.lt:string
-   language.mteq:string
-   language.lteq:string
-   language.neq:string
-   language.eq:string
+
+/*
+ * Counts languages in your backend and returns to caller.
+ */
 .description:Counts items from your languages table in your [generic|babelfish] database according to the specified arguments
 .type:crud-count
 

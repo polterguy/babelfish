@@ -1,22 +1,56 @@
+
+/*
+ * Updates an existing translation entity in your backend.
+ */
 .arguments
    id:string
    locale:string
    content:string
 .description:Updates an existing item in your translations table in your [generic|babelfish] database according to the specified arguments
 .type:crud-update
+
+
+/*
+ * Sanity checks invocation.
+ */
 validators.mandatory:x:@.arguments/*/locale
 validators.mandatory:x:@.arguments/*/id
+
+
+/*
+ * Making sure only authorised users have access to invoke endpoint.
+ */
 auth.ticket.verify:root, admin, translator
+
+
+/*
+ * Connecting to database.
+ */
 data.connect:[generic|babelfish]
+
+
+   /*
+    * Parametrising invocation.
+    */
    add:x:+/+/*/where/*/and
       get-nodes:x:@.arguments/*/[0,2]
    add:x:+/*/values
       get-nodes:x:@.arguments/*/[2,1000]
+
+
+   /*
+    * Updates record.
+    */
    data.update
       table:translations
       values
       where
          and
+
+
+   /*
+    * Returns result of above invocation to caller.
+    */
    unwrap:x:+/*
    return
       affected:x:@data.update

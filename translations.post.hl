@@ -1,6 +1,7 @@
 
 /*
- * Inserts a new translation entity, translating it to all supported languages in the process.
+ * Inserts a new translation entity, translating it to all supported languages in the process
+ * if caller requests it.
  */
 .arguments
    id:string
@@ -187,6 +188,7 @@ data.connect:[generic|babelfish]
    /*
     * Returning success to caller.
     */
+   response.status.set:201
    unwrap:x:+/*
    return
       result:success

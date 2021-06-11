@@ -1,3 +1,7 @@
+
+/*
+ * Updates an existing language in your backend.
+ */
 .arguments
    locale:string
    language:string

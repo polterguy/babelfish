@@ -1,3 +1,7 @@
+
+/*
+ * Deletes one specific language from your backend.
+ */
 .arguments
    locale:string
 .description:Deletes one item from your languages table in your [generic|babelfish] database matching the specified argument(s)

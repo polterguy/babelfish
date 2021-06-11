@@ -1,3 +1,7 @@
+
+/*
+ * Counts the number of translations in your backend according to the specified arguments.
+ */
 .arguments
    operator:string
    id.like:string

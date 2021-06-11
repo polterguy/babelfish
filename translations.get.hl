@@ -1,3 +1,7 @@
+
+/*
+ * Returns translations from your backend according to the specified conditions.
+ */
 .arguments
    limit:long
    offset:long
