@@ -22,6 +22,10 @@ Each translation belongs to one language, and each language can have multiple tr
 in the project using the language's ISO 639-1 code. Each translation entity again belongs to one language, and is
 referenced using the combination of its `id` and `locale` being the ISO code for the language.
 
+This allows you to retrieve translations from the system for a specific language, and do a key/value substitute
+on your client's UI, where each UI component requiring translations somehow as associated with the key the system
+returns for that particular piece of text.
+
 ### Definitions
 
 The following words have the following meaning in the system.
