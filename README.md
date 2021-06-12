@@ -31,6 +31,7 @@ The following words have the following meaning in the system.
 * `client` - Client system consuming the translations to display to its end users.
 * `dashboard` - An administrative UI component allowing an admin to edit the database of translations and languages through a UI.
 * `end user` - The end user wanting to see your application in his language of choice.
+* `namespace` - A unique string defining a single client somehow, allowing you to filter translations such that only translations relevant to one specific client is returned by the system.
 
 ## Publicly available endpoints
 
@@ -57,6 +58,19 @@ Typically you would store the selected language in the client, as the end user s
 And as the client initialises the next time, automatically retrieve all translation entities according
 to the end user's selection. Probably defaulting to for instance English if the end user has still not
 explicitly selected a language.
+
+**Notice** - The system supports namespaces, allowing you to filter your invocations to the above
+_"get-translations"_ endpoint, such that only translations relevant to your client
+is returned. This needs to be accommodated for as you create your translation entities, by
+using an `id` for your translations _"namespacing"_ the client it's intended to be used within.
+
+For instance, if you have an application called _"acme.chat"_, and this application contains a _"send"_
+button you want to translate to multiple languages, the id of your translation items for this button
+could be for instance something like _"acme.char.buttons.send"_.
+
+Then as you retrieve items for your _"acme.chat"_ client, you would pass in a query parameter named
+`locale.eq` and set its value to _"acme.chat%"_. The percent sign here becomes a wildcard, returning
+all items starting with the namespace of _"acme.chat"_.
 
 ## Administrative endpoints
 
