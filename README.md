@@ -57,7 +57,7 @@ endpoint, passing in the language the user selected. The last invocation require
 argument, to filter results according to one language, and is one of the returned `locale` values from
 the _"get-languages"_ endpoint.
 
-Both of these endpoints are caching their result of 20 minutes by applying the `Cache-Control` HTTP
+Both of these endpoints are caching their result for 20 minutes by applying the `Cache-Control` HTTP
 header before returning the result to the caller.
 
 Typically you would store the selected language in the client, as the end user selects a language -
