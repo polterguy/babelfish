@@ -72,7 +72,7 @@ could be for instance something like _"acme.chat.buttons.send"_.
 
 Then as you retrieve items for your _"acme.chat"_ client, you would pass in a query parameter named
 `locale.eq` and set its value to `acme.chat%`. The percent sign here becomes a wildcard, returning
-all items starting with the namespace of _"acme.chat"_.
+all items starting with the namespace of `acme.chat`.
 
 ## Administrative endpoints
 
