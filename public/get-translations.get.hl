@@ -10,6 +10,12 @@
 
 
 /*
+ * Sanity checking invocation.
+ */
+validators.mandatory:x:@.arguments/*/locale.eq
+
+
+/*
  * Making sure we cache items on client for 1200 seconds.
  */
 response.headers.add
