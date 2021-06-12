@@ -130,5 +130,5 @@ in your organisation to allow for translators to easily administrate your transl
 ## Installation
 
 Install into [Magic](https://github.com/polterguy/magic) by unzipping into your `/modules/` folder
-as _'babelfish'_ folder. You can play around with the endpoints the app creates for you by using the _'Endpoints'_
+as _"babelfish"_ folder. You can play around with the endpoints the app creates for you by using the _"Endpoints"_
 menu item in your Magic Dashboard.
