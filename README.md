@@ -23,7 +23,7 @@ in the project using the language's ISO 639-1 code. Each translation entity agai
 referenced using the combination of its `id` and `locale` being the ISO code for the language.
 
 This allows you to retrieve translations from the system for a specific language, and do a key/value substitute
-on your client's UI, where each UI component requiring translations somehow as associated with the key the system
+on your client's UI, where each UI component requiring translation somehow is associated with the key the system
 returns for that particular piece of text.
 
 ### Definitions
@@ -37,7 +37,7 @@ The following words have the following meaning in the system.
 * `client` - Client system consuming the translations to display to its end users.
 * `dashboard` - An administrative UI component allowing an admin to edit the database of translations and languages through a UI.
 * `end user` - The end user wanting to see your application in his language of choice.
-* `namespace` - A unique string defining a single client somehow, allowing you to filter translations such that only translations relevant to one specific client is returned by the system.
+* `namespace` - A unique string defining a single client somehow, allowing you to filter translations such that only translations relevant to one particular client is returned by the system.
 
 ## Publicly available endpoints
 
