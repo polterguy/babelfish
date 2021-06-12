@@ -7,7 +7,6 @@ endpoints, intended for being used by for instance frontend applications, needin
 snippets of text to multiple languages. The project builds upon these building blocks.
 
 * .Net 5
-* SignalR
 * MySQL or Microsoft SQL Server
 * Magic and Hyperlambda
 
