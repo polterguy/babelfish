@@ -77,7 +77,7 @@ helping you to administer the system's database of languages and translations. T
 * __DELETE__ - `magic/modules/babelfish/admin/languages` - Deletes a specific language. Notice, if the language contains translations this wil fail due to referential integrity on the database level. Delete all translations belonging to the language _first_ if you really need to do this.
 * __GET__ - `magic/modules/babelfish/admin/translations` - Returns translations according to the specified arguments.
 * __GET__ - `magic/modules/babelfish/admin/translations-count` - Returns the number of translations in the system acccording to the specified arguments.
-* __POST__ - `magic/modules/babelfish/admin/translations` - Creates a new translation entity given the specified arguments.
+* __POST__ - `magic/modules/babelfish/admin/translations` - Creates a new translation entity given the specified arguments. Notice, this endpoint allows you to automatically translate the specified translation entity by invoking Google Translate for each supported language on the server.
 * __PUT__ - `magic/modules/babelfish/admin/translations` - Updates an existing translation entity.
 * __DELETE__ - `magic/modules/babelfish/admin/translations` - Deletes one specific translation according to the specified arguments.
 
