@@ -18,7 +18,9 @@ same name.
 * `languages` - These are languages the system supports such as Italian, Spanish, English, Norwegian etc.
 * `translations` - These are translated entities in the database, and each translation is associated with one language.
 
-Each translation belongs to one language, and each language can have multiple translations.
+Each translation belongs to one language, and each language can have multiple translations. Languages are referenced
+in the project using the language's ISO 639-1 code. Each translation entity again belongs to one language, and is
+referenced using the combination of its `id` and `locale` being the ISO code for the language.
 
 ### Definitions
 
