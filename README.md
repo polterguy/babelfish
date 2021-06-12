@@ -15,8 +15,8 @@ snippets of text to multiple languages. The project builds upon these building b
 The project contains two main entities that are persisted into the database as tables having the
 same name.
 
-* `languages` - These are languages the system support such as Italian, Spanish, Eniglish, Norwegian etc.
-* `translations` - These are translated entites in the database, and are each associated with one language.
+* `languages` - These are languages the system supports such as Italian, Spanish, English, Norwegian etc.
+* `translations` - These are translated entites in the database, and each translation is associated with one language.
 
 Each translation belongs to one language, and each language can have multiple translations.
 
