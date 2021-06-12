@@ -76,7 +76,7 @@ all items starting with the namespace of `acme.chat`.
 
 ## Administrative endpoints
 
-In addition to the above publicly available endpoints, the module exposes 12 administrative endpoints,
+In addition to the above publicly available endpoints, the module exposes 10 administrative endpoints,
 helping you to administer the system's database of languages and translations. These are as follows.
 
 * __GET__ - `magic/modules/babelfish/admin/languages` - Returns all supported languages.
@@ -91,7 +91,7 @@ helping you to administer the system's database of languages and translations. T
 * __DELETE__ - `magic/modules/babelfish/admin/translations` - Deletes one specific translation according to the specified arguments.
 
 In addition to the above CRUD endpoints allowing you to administer your database, the system also contains the following
-ststistical endpoint, returning information about the state of your database.
+statistical endpoint, returning information about the state of your database.
 
 * __GET__ - `magic/modules/babelfish/admin/statistics` - Returns statistics about missing translations for missing languages making it easier to see missing translation entities.
 
