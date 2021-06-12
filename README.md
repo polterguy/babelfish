@@ -59,21 +59,6 @@ And as the client initialises the next time, automatically retrieve all translat
 to the end user's selection. Probably defaulting to for instance English if the end user has still not
 explicitly selected a language.
 
-### Namespacing translation entities
-
-The system supports namespaces, allowing you to filter your invocations to the above
-_"get-translations"_ endpoint, such that only translations relevant to your client
-is returned. This needs to be accommodated for as you create your translation entities, by
-using an `id` for your translations _"namespacing"_ the client it is intended to be used within.
-
-For instance, if you have an application called _"Acme Chat"_, and this application contains a _"send"_
-button you want to translate to multiple languages, the id of your translation items for this button
-could be for instance something like _"acme.chat.buttons.send"_.
-
-Then as you retrieve items for your _"acme.chat"_ client, you would pass in a query parameter named
-`locale.eq` and set its value to `acme.chat%`. The percent sign here becomes a wildcard, returning
-all items starting with the namespace of `acme.chat`.
-
 ## Administrative endpoints
 
 In addition to the above publicly available endpoints, the module exposes 10 administrative endpoints,
@@ -100,6 +85,21 @@ All of the above admin endpoints requires the user to belong to one of the follo
 * root
 * admin
 * translator
+
+## Namespacing translation entities
+
+The system supports namespaces, allowing you to filter your invocations to the above
+_"get-translations"_ endpoint, such that only translations relevant to your client
+is returned. This needs to be accommodated for as you create your translation entities, by
+using an `id` for your translations _"namespacing"_ the client it is intended to be used within.
+
+For instance, if you have an application called _"Acme Chat"_, and this application contains a _"send"_
+button you want to translate to multiple languages, the id of your translation items for this button
+could be for instance something like _"acme.chat.buttons.send"_.
+
+Then as you retrieve items for your _"acme.chat"_ client, you would pass in a query parameter named
+`locale.eq` and set its value to `acme.chat%`. The percent sign here becomes a wildcard, returning
+all items starting with the namespace of `acme.chat`.
 
 ## Google translate
 
