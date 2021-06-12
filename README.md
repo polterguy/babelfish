@@ -54,6 +54,22 @@ All of these endpoints requires the user to belong to one of the following roles
 * admin
 * translator
 
+## Google translate
+
+When and admin user wants to create translation entities, the system allows him to automatically translate whatever
+he supplies to the system, to all other supported languages automatically by using Google Translate. This allows the
+admin user to supply one translation entity to the system, and having a _"sane default"_ value provided for all other
+languages in the database.
+
+Of course, this is _not perfect_, and sometimes Google Translate does a very bad job at translating such phrases
+and words - But at least it provides you with a starting ground, significantly simplifying the job of translating
+your app, even to languages you do not master.
+
+## Dashboard
+
+The system comes with a [dashboard admin UI](https://github.com/polterguy/babelfish.frontend) that you can use
+in your organisation to allow for translators to easily administrate your translation database.
+
 ## Installation
 
 Install into [Magic](https://github.com/polterguy/magic) by unzipping into your `/modules/` folder
