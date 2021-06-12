@@ -12,8 +12,8 @@ These endpoints requires no authentication and are intended to be invoked by for
 needing to translate buttons, checkboxes and such, for the end user to see these in his language of
 choice.
 
-* GET `magic/modules/babelfish/public/get-languages` - Returns all supported languages.
-* GET `magic/modules/babelfish/public/get-translations` - Returns all translated entities.
+* __GET__ - `magic/modules/babelfish/public/get-languages` - Returns all supported languages.
+* __GET__ - `magic/modules/babelfish/public/get-translations` - Returns all translated entities.
 
 Typically you would invoke the _"get-languages"_ endpoint to retrieve all supported languages, for
 then to allow the end user to select a language from for instance a drop down select list populated
@@ -32,21 +32,21 @@ header before returning the result to the caller.
 In addition to the above publicly available endpoints, the module exposes 12 administrative endpoints,
 helping you to administer the system's database of languages and translations. These are as follows.
 
-* GET `magic/modules/babelfish/admin/languages` - Returns all supported languages.
-* GET `magic/modules/babelfish/admin/languages-count` - Returns the number of languages that exists in its database.
-* POST `magic/modules/babelfish/admin/languages` - Creates a new language.
-* PUT `magic/modules/babelfish/admin/languages` - Updates an existing language.
-* DELETE `magic/modules/babelfish/admin/languages` - Deletes a specific language. Notice, if the language contains translations this wil fail due to referential integrity on the database level. Delete all translations belonging to the language _first_ if you really need to do this.
-* GET `magic/modules/babelfish/admin/translations` - Returns translations according to the specified arguments.
-* GET `magic/modules/babelfish/admin/translations-count` - Returns the number of translations in the system acccording to the specified arguments.
-* POST `magic/modules/babelfish/admin/translations` - Creates a new translation entity given the specified arguments.
-* PUT `magic/modules/babelfish/admin/translations` - Updates an existing translation entity.
-* DELETE `magic/modules/babelfish/admin/translations` - Deletes one specific translation according to the specified arguments.
+* __GET__ - `magic/modules/babelfish/admin/languages` - Returns all supported languages.
+* __GET__ - `magic/modules/babelfish/admin/languages-count` - Returns the number of languages that exists in its database.
+* __POST__ - `magic/modules/babelfish/admin/languages` - Creates a new language.
+* __PUT__ - `magic/modules/babelfish/admin/languages` - Updates an existing language.
+* __DELETE__ - `magic/modules/babelfish/admin/languages` - Deletes a specific language. Notice, if the language contains translations this wil fail due to referential integrity on the database level. Delete all translations belonging to the language _first_ if you really need to do this.
+* __GET__ - `magic/modules/babelfish/admin/translations` - Returns translations according to the specified arguments.
+* __GET__ - `magic/modules/babelfish/admin/translations-count` - Returns the number of translations in the system acccording to the specified arguments.
+* __POST__ - `magic/modules/babelfish/admin/translations` - Creates a new translation entity given the specified arguments.
+* __PUT__ - `magic/modules/babelfish/admin/translations` - Updates an existing translation entity.
+* __DELETE__ - `magic/modules/babelfish/admin/translations` - Deletes one specific translation according to the specified arguments.
 
 In addition to the above CRUD endpoints allowing you to administer your database, the system also contains the following
 ststistical endpoint, returning information about the state of your database.
 
-* GET `magic/modules/babelfish/admin/statistics` - Returns statistics about missing translations for missing languages making it easier to see missing translation entities.
+* __GET__ - `magic/modules/babelfish/admin/statistics` - Returns statistics about missing translations for missing languages making it easier to see missing translation entities.
 
 All of these endpoints requires the user to belong to one of the following roles to allow the user to invoke the endpoint.
 
