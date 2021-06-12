@@ -4,28 +4,59 @@
 Babelfish is an enterprise translation micro service for apps needing to translate small pieces of text
 to multiple languages. In addition to an administrative backend, it contains two publicly available
 endpoints, intended for being used by for instance frontend applications, needing to translate small
-snippets of text to multiple languages.
+snippets of text to multiple languages. The project builds upon these building blocks.
+
+* .Net 5
+* SignalR
+* MySQL or Microsoft SQL Server
+* Magic and Hyperlambda
+
+## Structure
+
+The project contains two main entities that are persisted into the database as tables having the
+same name.
+
+* `languages` - These are languages the system support such as Italian, Spanish, Eniglish, Norwegian etc.
+* `translations` - These are translated entites in the database, and are each associated with one language.
+
+Each translation belongs to one language, and each language can have multiple translations.
+
+### Definitions
+
+The following words have the following meaning in the system.
+
+* `language` - One supported language in the system such as Italian, Spanish, English etc.
+* `translation` - One translated word, phrase, or piece of text, associated with one language, having the translated text as its content in the _"locale"_ of the language.
+* `admin` - One administrative user having access to modify the database of translations.
+* `client` - Client system consuming the translations to display to its end users.
+* `dashboard` - An administrative UI component allowing an admin to edit the database of translations and languages through a UI.
+* `end user` - The end user wanting to see your application in his language of choice.
 
 ## Publicly available endpoints
 
-These endpoints requires no authentication and are intended to be invoked by for instance frontends
-needing to translate buttons, checkboxes and such, for the end user to see these in his language of
+These endpoints requires no authentication and are intended to be invoked by clients
+needing to translate buttons, checkboxes, etc, for the end user to see these in his language of
 choice.
 
 * __GET__ - `magic/modules/babelfish/public/get-languages` - Returns all supported languages.
 * __GET__ - `magic/modules/babelfish/public/get-translations` - Returns all translated entities.
 
 Typically you would invoke the _"get-languages"_ endpoint to retrieve all supported languages, for
-then to allow the end user to select a language from for instance a drop down select list populated
+then to allow the end user to select a language from for instance a select list populated
 by the result of this invocation.
 
-Then as the user selects a language, you would retrieve translations by invoking the _"get-translations"_
+As the user selects a language, you would retrieve translations by invoking the _"get-translations"_
 endpoint, passing in the language the user selected. The last invocation requires a **[locale.eq]**
 argument, to filter results according to one language, and is one of the returned `locale` values from
 the _"get-languages"_ endpoint.
 
 Both of these endpoints are caching their result of 20 minutes by applying the `Cache-Control` HTTP
 header before returning the result to the caller.
+
+Typically you would store the selected language in the client, as the end user selects a language -
+And as the client initialises the next time, automatically retrieve all translation entities according
+to the end user's selection. Probably defaulting to for instance English if the end user has still not
+explicitly selected a language.
 
 ## Administrative endpoints
 
@@ -64,6 +95,9 @@ languages in the database.
 Of course, this is _not perfect_, and sometimes Google Translate does a very bad job at translating such phrases
 and words - But at least it provides you with a starting ground, significantly simplifying the job of translating
 your app, even to languages you do not master.
+
+**Notice** - The system does _not_ translate existing entities when you create new _languages_, only as you create
+new translation entities.
 
 ## Dashboard
 
