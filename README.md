@@ -119,7 +119,7 @@ and words - But at least it provides you with a starting ground, significantly s
 your app, even to languages you do not master.
 
 **Notice** - The system does _not_ translate existing entities when you create new _languages_, only as you create
-new translation entities. Hence, if you already have created translation entities, and then later add languages
+new _translation entities_. Hence, if you already have created translation entities, and then later add languages
 to your database, you will have to manually go through each translation entity and translate the entity explicitly.
 
 ## Dashboard
