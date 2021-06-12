@@ -93,7 +93,7 @@ helping you to administer the system's database of languages and translations. T
 In addition to the above CRUD endpoints allowing you to administer your database, the system also contains the following
 statistical endpoint, returning information about the state of your database.
 
-* __GET__ - `magic/modules/babelfish/admin/statistics` - Returns statistics about missing translation entities for languages, making it easier to see which languages are incomplete somehow and are missing translation items in your database.
+* __GET__ - `magic/modules/babelfish/admin/statistics` - Returns statistics about missing translation entities for languages, making it easier to see which languages are incomplete somehow, and are missing translation items in your database for specific languages.
 
 All of these endpoints requires the user to belong to one of the following roles to allow the user to invoke the endpoint.
 
