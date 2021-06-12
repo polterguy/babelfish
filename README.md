@@ -109,7 +109,7 @@ all items starting with the namespace of `acme.chat`.
 
 ## Google translate
 
-When and admin user wants to create translation entities, the system allows him to automatically translate whatever
+When an admin user wants to create translation entities, the system allows him to automatically translate whatever
 he supplies to the system, to all other supported languages automatically by using Google Translate. This allows the
 admin user to supply one translation entity to the system, and having a _"sane default"_ value provided for all other
 languages in the database.
