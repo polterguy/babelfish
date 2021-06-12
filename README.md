@@ -59,7 +59,9 @@ And as the client initialises the next time, automatically retrieve all translat
 to the end user's selection. Probably defaulting to for instance English if the end user has still not
 explicitly selected a language.
 
-**Notice** - The system supports namespaces, allowing you to filter your invocations to the above
+### Namespacing translation entities
+
+The system supports namespaces, allowing you to filter your invocations to the above
 _"get-translations"_ endpoint, such that only translations relevant to your client
 is returned. This needs to be accommodated for as you create your translation entities, by
 using an `id` for your translations _"namespacing"_ the client it's intended to be used within.
