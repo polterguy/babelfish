@@ -16,7 +16,7 @@ The project contains two main entities that are persisted into the database as t
 same name.
 
 * `languages` - These are languages the system supports such as Italian, Spanish, English, Norwegian etc.
-* `translations` - These are translated entites in the database, and each translation is associated with one language.
+* `translations` - These are translated entities in the database, and each translation is associated with one language.
 
 Each translation belongs to one language, and each language can have multiple translations.
 
@@ -26,6 +26,7 @@ The following words have the following meaning in the system.
 
 * `language` - One supported language in the system such as Italian, Spanish, English etc.
 * `translation` - One translated word, phrase, or piece of text, associated with one language, having the translated text as its content in the _"locale"_ of the language.
+* `locale` - The ISO 639-1 code for a language.
 * `admin` - One administrative user having access to modify the database of translations.
 * `client` - Client system consuming the translations to display to its end users.
 * `dashboard` - An administrative UI component allowing an admin to edit the database of translations and languages through a UI.
