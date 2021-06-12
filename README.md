@@ -97,7 +97,7 @@ All of the above admin endpoints requires the user to belong to one of the follo
 The system supports namespaces, allowing you to filter your invocations to the above
 _"get-translations"_ endpoint, such that only translations relevant to your client
 is returned. This needs to be accommodated for as you create your translation entities, by
-using an `id` for your translations _"namespacing"_ the client it is intended to be used within.
+using an `id` for your translations _"namespacing"_ the client it is intended to consumed from.
 
 For instance, if you have an application called _"Acme Chat"_, and this application contains a _"send"_
 button you want to translate to multiple languages, the id of your translation items for this button
