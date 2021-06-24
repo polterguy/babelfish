@@ -1,0 +1,7 @@
+
+/*
+ * Ensures the "translator" role exists.
+ */
+signal:magic.auth.ensure-role
+   role:translator
+   description:Users allowed to administrate and create new translations and languages for BabelFish belongs to this role.
