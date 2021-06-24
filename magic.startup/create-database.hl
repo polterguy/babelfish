@@ -1,51 +1,10 @@
 
 /*
- * Runs during startup of Magic, and basically just ensures the babelfish database exists.
+ * Runs during startup of Magic, and basically just ensures the babelfish database exists,
+ * and is updated by running migration scripts after attempting to create the database.
+ *
  * If the database doesn't exist, it will create it.
  */
-try
-   log.info:Initializing babelfish module
-   config.get:"magic:databases:default"
-   strings.concat
-      .:magic.db.
-      get-value:x:@config.get
-      .:.databases
-   signal:x:-
-   if
-      not
-         exists:x:@signal/*/*/db/=babelfish
-      .lambda
-
-         // Database doesn't exist, creating it.
-         log.info:Creating babelfish database
-         strings.concat
-            .:/modules/babelfish/magic.startup/
-            get-value:x:@config.get
-            .:-babelfish.sql
-         io.file.load:x:-
-         data.connect:magic
-            database-type:x:@config.get
-            if
-               eq
-                  get-value:x:@config.get
-                  .:mssql
-               .lambda
-                  set-name:x:@data.connect/*/data.execute
-                     .:mssql.execute-batch
-                  remove-nodes:x:@data.connect/*/data.execute/*/database-type
-            data.execute:x:@io.file.load
-               database-type:x:@config.get
-         log.info:Babelfish database successfully created
-   else
-      log.info:Babelfish database already exists
-.catch
-
-   /*
-    * Notice, we might not even have database configured (correctly) at all!
-    */
-   try
-      log.error
-         .:"Something went wrong when initializing babelfish module - "
-         get-value:x:@.arguments/*/message
-   .catch
-      .do-nothing
+signal:magic.modules.ensure-database
+   module:babelfish
+   database:babelfish
