@@ -1,16 +1,27 @@
-The MIT License (MIT)
-Copyright © 2021 Thomas Hansen, thomas@servergardens.com
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-documentation files (the “Software”), to deal in the Software without restriction, including without limitation
-the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
-and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Copyright (c) 2021 Thomas Hansen - thomas@servergardens.com, all rights reserved
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions
-of the Software.
+Permission is hereby granted to the customer of this Software, to deal
+with the Software, modify it, install it on one single production server, and an
+infinite amount of development/test servers, subject to the following conditions:
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
-TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
-CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-DEALINGS IN THE SOFTWARE.
+1. The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+2. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESSED OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE, OR THE USE OF OR OTHER DEALINGS
+RELATED TO THE SOFTWARE IN ANY WAYS.
+
+3. Under no conditions may the Software be distributed in any forms to a
+person not employed by the same legal entity as the customer having purchased
+the Software.
+
+4. If you cannot meet the above conditions, you need to inform us immediately
+by sending an email to thomas@servergardens.com, and we will terminate your
+license, and return whatever you paid for the software immediately back to you,
+after you have confirmed to us that you have physically deleted all copies you
+have of the Software.

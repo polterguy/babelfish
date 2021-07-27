@@ -127,13 +127,8 @@ to your database, you will have to manually go through each translation entity a
 The system comes with a [dashboard admin UI](https://github.com/polterguy/babelfish.frontend) that you can use
 in your organisation to allow for translators to easily administrate your translation database.
 
-## Installation
-
-Install into [Magic](https://github.com/polterguy/magic) by unzipping into your `/modules/` folder
-as _"babelfish"_ folder. You can play around with the endpoints the app creates for you by using the _"Endpoints"_
-menu item in your Magic Dashboard.
-
 ## License
 
-Licensed under the terms of the MIT license as published by the Open Source Initiative.
-See the enclosed file _"LICENSE"_ for details.
+Basically, you can install the Software on an infinite amount of development machines, and _one_
+production machine. See the enclosed file _"LICENSE"_ for details which is being distributed together with
+the software.
