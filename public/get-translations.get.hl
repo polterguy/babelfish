@@ -6,7 +6,7 @@
 .arguments
    locale.eq:string
    id.like:string
-.description:Returns all translation entities from your backend
+.description:Returns all translation entities from your backend for the given locale, matching the optional id
 
 
 /*
@@ -37,7 +37,6 @@ data.connect:[generic|babelfish]
       table:translations
       columns
          id
-         locale
          content
       limit:-1
       where
@@ -45,6 +44,19 @@ data.connect:[generic|babelfish]
 
 
    /*
+    * Transforming result to key/value object.
+    */
+   for-each:x:@data.read/*
+      set-name:x:./*/add/*/*
+         get-value:x:@.dp/#/*/id
+      set-value:x:./*/add/*/*
+         get-value:x:@.dp/#/*/content
+      add:x:@data.connect/*/return
+         .
+            .
+
+
+   /*
     * Returning results of above invocation to caller.
     */
-   return-nodes:x:@data.read/*
+   return
