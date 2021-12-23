@@ -18,7 +18,7 @@ validators.mandatory:x:@.arguments/*/locale.eq
 /*
  * Making sure we cache items on client for 1200 seconds.
  */
-response.headers.add
+response.headers.set
    Cache-Control:public, max-age=1200
 
 
