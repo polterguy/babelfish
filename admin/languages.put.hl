@@ -1,54 +1,34 @@
 
-/*
- * Updates an existing language in your backend.
- */
+// Updates an existing language in your backend.
 .arguments
    locale:string
    language:string
 .description:Updates an existing item in your languages table in your [generic|babelfish] database according to the specified arguments
 .type:crud-update
 
-
-/*
- * Making sure only authorised clients can invoke endpoint.
- */
+// Making sure only authorised clients can invoke endpoint.
 auth.ticket.verify:root, admin, translator
 
-
-/*
- * Sanity checking invocation.
- */
+// Sanity checking invocation.
 validators.mandatory:x:@.arguments/*/locale
 
-
-/*
- * Connecting to database.
- */
+// Connecting to database.
 data.connect:[generic|babelfish]
 
-
-   /*
-    * Parametrising invocation.
-    */
+   // Parametrising invocation.
    add:x:+/+/*/where/*/and
       get-nodes:x:@.arguments/*/[0,1]
    add:x:+/*/values
       get-nodes:x:@.arguments/*/[1,1000]
 
-
-   /*
-    * Updating our item in database.
-    */
+   // Updating our item in database.
    data.update
       table:languages
       values
       where
          and
 
-
-   /*
-    * Returning results of above invocation to caller.
-    */
+   // Returning results of above invocation to caller.
    unwrap:x:+/*
    return
       affected:x:@data.update

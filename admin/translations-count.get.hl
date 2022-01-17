@@ -1,7 +1,5 @@
 
-/*
- * Counts the number of translations in your backend according to the specified arguments.
- */
+// Counts the number of translations in your backend according to the specified arguments.
 .arguments
    operator:string
    id.like:string
@@ -28,16 +26,10 @@
 .description:Counts items from your translations table in your [generic|babelfish] database according to the specified arguments
 .type:crud-count
 
-
-/*
- * Making sure only authorised clients can invoke endpoint.
- */
+// Making sure only authorised clients can invoke endpoint.
 auth.ticket.verify:root, admin, translator
 
-
-/*
- * Applying correct boolean operator according to arguments.
- */
+// Applying correct boolean operator according to arguments.
 if
    exists:x:@.arguments/*/operator
    .lambda
@@ -49,26 +41,17 @@ if
          default
             throw:"Unsupported operator, only 'and' and 'or' supported"
 
-
-/*
- * Connecting to database.
- */
+// Connecting to database.
 data.connect:[generic|babelfish]
 
-
-   /*
-    * Parametrising invocation.
-    */
+   // Parametrising invocation.
    add:x:+/+/+
       get-nodes:x:@.arguments/*/operator
    remove-nodes:x:@.arguments/*/operator
    add:x:+/*/where/*
       get-nodes:x:@.arguments/*
 
-
-   /*
-    * Reading items from our database.
-    */
+   // Reading items from our database.
    data.read
       table:translations
       columns
@@ -78,8 +61,5 @@ data.connect:[generic|babelfish]
          and
       limit:long:1
 
-
-   /*
-    * Returning results of above invocation to caller.
-    */
+   // Returning results of above invocation to caller.
    return-nodes:x:@data.read/*/*

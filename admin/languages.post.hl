@@ -1,45 +1,28 @@
 
-/*
- * Creates a new language in your backend.
- */
+// Creates a new language in your backend.
 .arguments
    locale:string
    language:string
 .description:Creates an item in your languages table in your [generic|babelfish] database according to the specified arguments
 .type:crud-create
 
-
-/*
- * Making sure only authorised clients can invoke endpoint.
- */
+// Making sure only authorised clients can invoke endpoint.
 auth.ticket.verify:root, admin, translator
 
-
-/*
- * Connecting to database.
- */
+// Connecting to database.
 data.connect:[generic|babelfish]
 
-
-   /*
-    * Parametrising invocation.
-    */
+   // Parametrising invocation.
    add:x:./*/data.create/*/values
       get-nodes:x:@.arguments/*
 
-
-   /*
-    * Creating our item in database.
-    */
+   // Creating our item in database.
    data.create
       table:languages
       return-id:bool:false
       values
 
-
-   /*
-    * Returning results of above invocation to caller.
-    */
+   // Returning results of above invocation to caller.
    response.status.set:201
    unwrap:x:+/*
    return

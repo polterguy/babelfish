@@ -1,7 +1,5 @@
 
-/*
- * Returns translations from your backend according to the specified conditions.
- */
+// Returns translations from your backend according to the specified conditions.
 .arguments
    limit:long
    offset:long
@@ -32,16 +30,10 @@
 .description:Returns items from your translations table in your [generic|babelfish] database according to the specified arguments
 .type:crud-read
 
-
-/*
- * Making sure only authorised clients can invoke endpoint.
- */
+// Making sure only authorised clients can invoke endpoint.
 auth.ticket.verify:root, admin, translator
 
-
-/*
- * Applying correct boolean operator to invocation.
- */
+// Applying correct boolean operator to invocation.
 if
    exists:x:@.arguments/*/operator
    .lambda
@@ -53,16 +45,10 @@ if
          default
             throw:"Unsupported operator, only 'and' and 'or' supported"
 
-
-/*
- * Connecting to database.
- */
+// Connecting to database.
 data.connect:[generic|babelfish]
 
-
-   /*
-    * Parametrising invocation.
-    */
+   // Parametrising invocation.
    add:x:+/+/+/+/+/+/+
       get-nodes:x:@.arguments/*/limit
       get-nodes:x:@.arguments/*/offset
@@ -76,10 +62,7 @@ data.connect:[generic|babelfish]
    add:x:+/*/where/*
       get-nodes:x:@.arguments/*
 
-
-   /*
-    * Reading items from database.
-    */
+   // Reading items from database.
    data.read
       table:translations
       columns
@@ -89,8 +72,5 @@ data.connect:[generic|babelfish]
       where
          and
 
-
-   /*
-    * Returning result of above invocation.
-    */
+   // Returning result of above invocation.
    return-nodes:x:@data.read/*

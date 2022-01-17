@@ -5,23 +5,14 @@
  */
 .description:Returns all languagues from your backend
 
-
-/*
- * Making sure we cache items on client for 1200 seconds.
- */
+// Making sure we cache items on client for 1200 seconds.
 response.headers.set
    Cache-Control:public, max-age=1200
 
-
-/*
- * Connecting to database.
- */
+// Connecting to database.
 data.connect:[generic|babelfish]
 
-
-   /*
-    * Reading items from database.
-    */
+   // Reading items from database.
    data.read
       table:languages
       columns
@@ -29,8 +20,5 @@ data.connect:[generic|babelfish]
          language
       limit:-1
 
-
-   /*
-    * Returning results of above invocation to caller.
-    */
+   // Returning results of above invocation to caller.
    return-nodes:x:@data.read/*

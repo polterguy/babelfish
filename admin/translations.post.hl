@@ -9,29 +9,17 @@
    content:string
    translate:bool
 
-
-/*
- * Meta information.
- */
+// Meta information.
 .description:Inserts a new translation entity into your database, and translates it into all supported languages in the process.
 .type:crud-create
 
-
-/*
- * Making sure only authorised users have access to invoke endpoint.
- */
+// Making sure only authorised users have access to invoke endpoint.
 auth.ticket.verify:root, admin, translator
 
-
-/*
- * Connecting to database.
- */
+// Connecting to database.
 data.connect:[generic|babelfish]
 
-
-   /*
-    * Checking if item already exists.
-    */
+   // Checking if item already exists.
    data.read
       table:translations
       columns
@@ -57,10 +45,7 @@ data.connect:[generic|babelfish]
             public:true
             status:400
 
-
-   /*
-    * Inserting item as specified by caller.
-    */
+   // Inserting item as specified by caller.
    add:x:+/*/values
       get-nodes:x:@.arguments/*/id
       get-nodes:x:@.arguments/*/locale
@@ -70,14 +55,10 @@ data.connect:[generic|babelfish]
       return-id:bool:false
       values
 
-
-   /*
-    * Checking if caller wants to translate entity.
-    */
+   // Checking if caller wants to translate entity.
    if
       get-value:x:@.arguments/*/translate
       .lambda
-
 
          /*
           * This is where we duplicate our entry.
@@ -91,16 +72,10 @@ data.connect:[generic|babelfish]
                and
                   locale.neq:x:@.arguments/*/locale
 
-
-         /*
-          * Then we iterate over all languages as retrieved from above [data.read] invocation.
-          */
+         // Then we iterate over all languages as retrieved from above [data.read] invocation.
          for-each:x:@data.read/*
 
-
-            /*
-             * Making sure item is not already translated for currently iterated language.
-             */
+            // Making sure item is not already translated for currently iterated language.
             data.read
                table:translations
                columns
@@ -121,7 +96,7 @@ data.connect:[generic|babelfish]
                    * Item has not been translated for currently iterated language.
                    * Hence, invoking Google Translate, and injecting default translation entity
                    * as returned from Google Translate.
-                   *
+                   * 
                    * Notice, Google Translate will return jibberish for some languages,
                    * hence we need to accommodate for that, by making sure we trap JSON
                    * parsing exceptions.
@@ -132,7 +107,6 @@ data.connect:[generic|babelfish]
                         text:x:@.arguments/*/content
                         src-lang:x:@.arguments/*/locale
                         dest-lang:x:@.dp/#/*/locale
-
 
                      /*
                       * Making sure Google Translate actually returned something
@@ -150,10 +124,7 @@ data.connect:[generic|babelfish]
                                  .
                         .lambda
 
-
-                           /*
-                            * Google Translate returned something.
-                            */
+                           // Google Translate returned something.
                            data.create
                               table:translations
                               values
@@ -173,21 +144,15 @@ data.connect:[generic|babelfish]
                         get-value:x:@.arguments/*/message
                         .:"'"
 
-
-                     /*
-                      * Google Translate returned something.
-                      */
+                     // Google Translate returned something.
                      data.create
                         table:translations
                         values
                            id:x:../*/.arguments/*/id
                            locale:x:@.dp/#/*/locale
-                           content:'?????'
+                           content:?????
 
-
-   /*
-    * Returning success to caller.
-    */
+   // Returning success to caller.
    response.status.set:201
    unwrap:x:+/*
    return

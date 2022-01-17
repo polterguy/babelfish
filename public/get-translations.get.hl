@@ -8,31 +8,19 @@
    id.like:string
 .description:Returns all translation entities from your backend for the given locale, matching the optional id
 
-
-/*
- * Sanity checking invocation.
- */
+// Sanity checking invocation.
 validators.mandatory:x:@.arguments/*/locale.eq
 
-
-/*
- * Making sure we cache items on client for 1200 seconds.
- */
+// Making sure we cache items on client for 1200 seconds.
 response.headers.set
    Cache-Control:public, max-age=1200
 
-
-/*
- * Connecting to database.
- */
+// Connecting to database.
 data.connect:[generic|babelfish]
    add:x:+/*/where/*/and
       get-nodes:x:@.arguments/*
 
-
-   /*
-    * Reading items from database.
-    */
+   // Reading items from database.
    data.read
       table:translations
       columns
@@ -42,10 +30,7 @@ data.connect:[generic|babelfish]
       where
          and
 
-
-   /*
-    * Transforming result to key/value object.
-    */
+   // Transforming result to key/value object.
    for-each:x:@data.read/*
       set-name:x:./*/add/*/*
          get-value:x:@.dp/#/*/id
@@ -55,8 +40,5 @@ data.connect:[generic|babelfish]
          .
             .
 
-
-   /*
-    * Returning results of above invocation to caller.
-    */
+   // Returning results of above invocation to caller.
    return

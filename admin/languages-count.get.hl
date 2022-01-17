@@ -1,20 +1,12 @@
 
-/*
- * Counts languages in your backend and returns to caller.
- */
+// Counts languages in your backend and returns to caller.
 .description:Counts items from your languages table in your [generic|babelfish] database according to the specified arguments
 .type:crud-count
 
-
-/*
- * Making sure only authorised clients can invoke endpoint.
- */
+// Making sure only authorised clients can invoke endpoint.
 auth.ticket.verify:root, admin, translator
 
-
-/*
- * Applying the correct boolean operators according to specified arguments.
- */
+// Applying the correct boolean operators according to specified arguments.
 if
    exists:x:@.arguments/*/operator
    .lambda
@@ -26,26 +18,17 @@ if
          default
             throw:"Unsupported operator, only 'and' and 'or' supported"
 
-
-/*
- * Connecting to database.
- */
+// Connecting to database.
 data.connect:[generic|babelfish]
 
-
-   /*
-    * Applying arguments.
-    */
+   // Applying arguments.
    add:x:./*/data.read
       get-nodes:x:@.arguments/*/operator
    remove-nodes:x:@.arguments/*/operator
    add:x:+/*/where/*
       get-nodes:x:@.arguments/*
 
-
-   /*
-    * Reading items from database.
-    */
+   // Reading items from database.
    data.read
       table:languages
       columns
@@ -55,8 +38,5 @@ data.connect:[generic|babelfish]
          and
       limit:long:1
 
-
-   /*
-    * Returning results of above invocation to caller.
-    */
+   // Returning results of above invocation to caller.
    return-nodes:x:-/*/*
