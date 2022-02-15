@@ -144,7 +144,7 @@ data.connect:[generic|babelfish]
                         get-value:x:@.arguments/*/message
                         .:"'"
 
-                     // Google Translate returned something.
+                     // Inserting bogus item into database.
                      data.create
                         table:translations
                         values
