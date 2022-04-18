@@ -2,8 +2,6 @@
  * This PostgreSQL script creates a minimalistic translation type
  * of database for you in PostgreSQL.
  */
---create database babelfish;
-set schema 'babelfish';
 
 
 /*
